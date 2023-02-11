@@ -63,7 +63,7 @@ btn_hold.addEventListener('click', () => {
       currentCount;
 
     // # check if players score is >=100 if yes than finish the game.
-    if (score[activePlayer] >= 10) {
+    if (score[activePlayer] >= 100) {
       playing = false;
       document
         .querySelector(`.player--${activePlayer}`)
