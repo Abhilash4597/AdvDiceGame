@@ -25,7 +25,6 @@ btn_roll.addEventListener('click', () => {
   if (randomNum !== 1) {
     // # increasing current count.
     currentCount += randomNum;
-    // current_1.textContent = currentCount;
     document.getElementById(`current--${activePlayer}`).textContent = currentCount;
   } else {
     // # switching the player after getting 1 in dice.
@@ -38,7 +37,7 @@ btn_roll.addEventListener('click', () => {
 });
 
 btn_hold.addEventListener('click', () => {
-  // # Add current score to active player's score
+  // # Add current score to active player's score.
 
   score[activePlayer] += currentCount;
   document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
@@ -46,26 +45,23 @@ btn_hold.addEventListener('click', () => {
   currentCount = 0;
   document.getElementById(`current--${activePlayer}`).textContent = currentCount;
 
-  // # check if players score is >=100 if yes than finish the game
+  // # check if players score is >=100 if yes than finish the game.
 
-  // # switch to next player
+
+
+  // # switch to next player.
   activePlayer = activePlayer === 0 ? 1 : 0;
   player1.classList.toggle('player--active');
   player2.classList.toggle('player--active');
-})
-// btn_hold.addEventListener('click', () => {
-//   // count2 += currentCount;
-//   count1 += currentCount;
-//   if (count1 !== 100) {
-//     // score_1.textContent = count1;
-//     if (randomNum !== 1) {
-//       document.getElementById(`score--${activePlayer}`).textContent = count1//`count${randomNum}`;
-//       document.getElementById(`current--${activePlayer}`).textContent = 0;
-//       !randomNum;
-//       count1 = 0;
-//       currentCount = 0;
-//     }
-//   } else {
-//     alert('player1 is winner');
-//   }
-// });
+});
+
+// # Resetting the whole game.
+
+btn_new.addEventListener('click', () => {
+  currentCount = 0;
+  score = [0, 0];
+  activePlayer = 0;
+  score_1.textContent = score[0];
+  score_2.textContent = score[1];
+  dice.removeAttribute('src', randomDice);
+});
