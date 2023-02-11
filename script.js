@@ -16,6 +16,15 @@ let currentCount = 0;
 let score = [0, 0];
 let activePlayer = 0;
 
+// # Function of switching the players.
+function switchPlayers() {
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentCount = 0;
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player1.classList.toggle('player--active');
+  player2.classList.toggle('player--active');
+}
+
 btn_roll.addEventListener('click', () => {
   // # random dice.
   randomNum = Math.floor(Math.random() * 6) + 1;
@@ -28,11 +37,12 @@ btn_roll.addEventListener('click', () => {
     document.getElementById(`current--${activePlayer}`).textContent = currentCount;
   } else {
     // # switching the player after getting 1 in dice.
-    document.getElementById(`current--${activePlayer}`).textContent = 0;
-    currentCount = 0;
-    activePlayer = activePlayer === 0 ? 1 : 0;
-    player1.classList.toggle('player--active');
-    player2.classList.toggle('player--active');
+    // document.getElementById(`current--${activePlayer}`).textContent = 0;
+    // currentCount = 0;
+    // activePlayer = activePlayer === 0 ? 1 : 0;
+    // player1.classList.toggle('player--active');
+    // player2.classList.toggle('player--active');
+    switchPlayers();
   }
 });
 
@@ -50,13 +60,10 @@ btn_hold.addEventListener('click', () => {
   
 
   // # switch to next player.
-  activePlayer = activePlayer === 0 ? 1 : 0;
-  player1.classList.toggle('player--active');
-  player2.classList.toggle('player--active');
+  switchPlayers();
 });
 
 // # Resetting the whole game.
-
 btn_new.addEventListener('click', () => {
   currentCount = 0;
   score = [0, 0];
