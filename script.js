@@ -47,7 +47,7 @@ btn_hold.addEventListener('click', () => {
 
   // # check if players score is >=100 if yes than finish the game.
 
-
+  
 
   // # switch to next player.
   activePlayer = activePlayer === 0 ? 1 : 0;
@@ -61,6 +61,8 @@ btn_new.addEventListener('click', () => {
   currentCount = 0;
   score = [0, 0];
   activePlayer = 0;
+  current_1.textContent = currentCount;
+  current_2.textContent = currentCount;
   score_1.textContent = score[0];
   score_2.textContent = score[1];
   dice.removeAttribute('src', randomDice);
