@@ -15,6 +15,7 @@ let randomDice;
 let currentCount = 0;
 let score = [0, 0];
 let activePlayer = 0;
+let playing = true;
 
 // # Function of switching the players.
 function switchPlayers() {
@@ -26,48 +27,70 @@ function switchPlayers() {
 }
 
 btn_roll.addEventListener('click', () => {
-  // # random dice.
-  randomNum = Math.floor(Math.random() * 6) + 1;
-  randomDice = `dices/dice-${randomNum}.png`;
-  dice.setAttribute('src', randomDice);
+  if (playing) {
+    // # random dice.
+    randomNum = Math.floor(Math.random() * 6) + 1;
+    randomDice = `dices/dice-${randomNum}.png`;
+    dice.setAttribute('src', randomDice);
 
-  if (randomNum !== 1) {
-    // # increasing current count.
-    currentCount += randomNum;
-    document.getElementById(`current--${activePlayer}`).textContent = currentCount;
-  } else {
-    // # switching the player after getting 1 in dice.
-    // document.getElementById(`current--${activePlayer}`).textContent = 0;
-    // currentCount = 0;
-    // activePlayer = activePlayer === 0 ? 1 : 0;
-    // player1.classList.toggle('player--active');
-    // player2.classList.toggle('player--active');
-    switchPlayers();
+    if (randomNum !== 1) {
+      // # increasing current count.
+      currentCount += randomNum;
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentCount;
+    } else {
+      // # switching the player after getting 1 in dice.
+      // document.getElementById(`current--${activePlayer}`).textContent = 0;
+      // currentCount = 0;
+      // activePlayer = activePlayer === 0 ? 1 : 0;
+      // player1.classList.toggle('player--active');
+      // player2.classList.toggle('player--active');
+      switchPlayers();
+    }
   }
 });
 
 btn_hold.addEventListener('click', () => {
-  // # Add current score to active player's score.
+  if (playing) {
+    // # Add current score to active player's score.
 
-  score[activePlayer] += currentCount;
-  document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
+    score[activePlayer] += currentCount;
+    document.getElementById(`score--${activePlayer}`).textContent =
+      score[activePlayer];
 
-  currentCount = 0;
-  document.getElementById(`current--${activePlayer}`).textContent = currentCount;
+    currentCount = 0;
+    document.getElementById(`current--${activePlayer}`).textContent =
+      currentCount;
 
-  // # check if players score is >=100 if yes than finish the game.
-
-  
-
-  // # switch to next player.
-  switchPlayers();
+    // # check if players score is >=100 if yes than finish the game.
+    if (score[activePlayer] >= 10) {
+      playing = false;
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add('player--winner');
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove('player--active');
+      dice.removeAttribute('src', randomDice);
+    } else {
+      // # switch to next player.
+      switchPlayers();
+    }
+  }
 });
 
 // # Resetting the whole game.
 btn_new.addEventListener('click', () => {
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove('player--winner');
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add('player--active');
   currentCount = 0;
   score = [0, 0];
   activePlayer = 0;
+  playing = true;
   current_1.textContent = currentCount;
   current_2.textContent = currentCount;
   score_1.textContent = score[0];
