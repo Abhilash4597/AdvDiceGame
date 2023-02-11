@@ -13,8 +13,7 @@ const btn_hold = document.querySelector('.btn--hold');
 let randomNum;
 let randomDice;
 let currentCount = 0;
-let count1 = 0;
-let count2 = 0;
+let score = [0, 0];
 let activePlayer = 0;
 
 btn_roll.addEventListener('click', () => {
@@ -35,11 +34,25 @@ btn_roll.addEventListener('click', () => {
     activePlayer = activePlayer === 0 ? 1 : 0;
     player1.classList.toggle('player--active');
     player2.classList.toggle('player--active');
-    // current_1.textContent = 0;
   }
-  // console.log(currentCount);
 });
 
+btn_hold.addEventListener('click', () => {
+  // # Add current score to active player's score
+
+  score[activePlayer] += currentCount;
+  document.getElementById(`score--${activePlayer}`).textContent = score[activePlayer];
+
+  currentCount = 0;
+  document.getElementById(`current--${activePlayer}`).textContent = currentCount;
+
+  // # check if players score is >=100 if yes than finish the game
+
+  // # switch to next player
+  activePlayer = activePlayer === 0 ? 1 : 0;
+  player1.classList.toggle('player--active');
+  player2.classList.toggle('player--active');
+})
 // btn_hold.addEventListener('click', () => {
 //   // count2 += currentCount;
 //   count1 += currentCount;
